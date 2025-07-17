@@ -5,7 +5,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 
 from config import BOT_TOKEN, SEND_HOUR, SEND_MINUTE, SEND_MINUTE0, SEND_HOUR0
-from handlers import handle_reply, handle_evening_reply
+from handlers import handle_time_reply
 from scheduler import send_morning_message, send_evening_message
 
 LOCAL_TZ = pytz.timezone("Asia/Bishkek")
@@ -13,8 +13,7 @@ LOCAL_TZ = pytz.timezone("Asia/Bishkek")
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
-dp.message.register(handle_reply)
-dp.message.register(handle_evening_reply)
+dp.message.register(handle_time_reply)
 async def on_startup():
     scheduler = AsyncIOScheduler(timezone=LOCAL_TZ)
     # Запланировать отправку утреннего сообщения
